@@ -107,14 +107,14 @@
       <div class="absolute -bottom-2 -left-2 text-4xl opacity-20">🐷</div>
       <span class="maka-tag bg-[#FDE875] text-xs px-3 py-1 inline-block mb-1">2027/01/09 - 01/17</span>
       <h1 class="text-2xl font-black text-[#332C27] tracking-wider">2027 東京豬豬冬日自由行 🇯🇵</h1>
-    </header>
-    <!-- 頂部導覽列 (順序：首頁 ➔ 每日行程 ➔ 地鐵圖 ➔ 日幣計算機 ➔ 住宿 ➔ 折價券 ➔ VJW) -->
+    <!-- 頂部導覽列 (順序：首頁 ➔ 每日行程 ➔ 地鐵圖 ➔ 日幣計算機 ➔ 記帳 ➔ 住宿 ➔ 折價券 ➔ VJW) -->
     <nav class="mb-4">
       <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 px-1">
         <button onclick="switchTab('home')" id="btn-home" class="nav-tab-btn maka-btn bg-[#FDE875] px-4 py-2 font-bold text-sm whitespace-nowrap">首頁</button>
         <button onclick="switchTab('itinerary')" id="btn-itinerary" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">每日行程</button>
         <button onclick="switchTab('metro')" id="btn-metro" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">地鐵圖</button>
         <button onclick="switchTab('calc')" id="btn-calc" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">日幣計算機</button>
+        <button onclick="switchTab('expense')" id="btn-expense" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">記帳</button>
         <button onclick="switchTab('hotel')" id="btn-hotel" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">住宿</button>
         <a href="https://alinchuang.my.canva.site/" target="_blank" class="maka-btn bg-[#FFF2D6] hover:bg-[#ffe5a8] px-4 py-2 font-bold text-sm whitespace-nowrap flex items-center gap-1 no-underline text-[#332C27]">折價券</a>
         <a href="https://www.vjw.digital.go.jp/" target="_blank" class="maka-btn bg-[#FFD1DC] hover:bg-[#ffaab5] px-4 py-2 font-bold text-sm whitespace-nowrap flex items-center gap-1 no-underline text-[#332C27]">VJW</a>
@@ -315,6 +315,109 @@
           <button onclick="appendNum('0')" class="maka-btn p-3 font-black text-lg bg-white">0</button>
           <button onclick="deleteNum()" class="maka-btn p-3 font-black text-sm bg-orange-200">⌫ 刪除</button>
           <button onclick="clearCalc()" class="maka-btn p-3 font-black text-sm bg-rose-200">C 清除</button>
+        </div>
+      </section>
+
+      <!-- 4.5. 記帳功能 (Expense Tracker) -->
+      <section id="tab-expense" class="tab-content space-y-4">
+        <!-- 總計卡片 -->
+        <div class="maka-card bg-[#B5EAD7] p-4 text-center space-y-1">
+          <h3 class="font-black text-sm text-[#332C27] flex items-center justify-center gap-1">
+            <span>🛍️</span> 旅程消費總計
+          </h3>
+          <div class="text-3xl font-black text-[#332C27]">
+            ¥ <span id="expense-total-jpy">0</span>
+          </div>
+          <div class="text-xs font-bold text-gray-700">
+            約合 NT$ <span id="expense-total-twd">0</span> （以匯率 <span id="expense-rate-display">0.21</span> 計算）
+          </div>
+        </div>
+
+        <!-- 記帳輸入卡片 -->
+        <div class="maka-card bg-white p-4 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="font-black text-sm flex items-center gap-1">
+              <span>✍️</span> 新增日幣消費
+            </h4>
+            <!-- 分類選擇 -->
+            <select id="expense-category" class="text-xs font-bold border-2 border-[#332C27] rounded-lg p-1 bg-[#FFF2D6] text-[#332C27]">
+              <option value="🛍️ 購物">🛍️ 購物</option>
+              <option value="🍱 餐飲">🍱 餐飲</option>
+              <option value="🚆 交通">🚆 交通</option>
+              <option value="🎟️ 門票">🎟️ 門票</option>
+              <option value="🏨 住宿">🏨 住宿</option>
+              <option value="💡 其他">💡 其他</option>
+            </select>
+          </div>
+
+          <!-- 商品名稱與金額顯示區 -->
+          <div class="space-y-2">
+            <input type="text" id="expense-name" placeholder="輸入商品或項目名稱 (選填，例：極上和牛)" class="w-full text-xs font-bold border-2 border-[#332C27] rounded-xl p-2.5 bg-[#FDF8EC] focus:outline-none focus:bg-white">
+            
+            <!-- 含稅/不含稅 切換按鈕與金額顯示 -->
+            <div class="bg-[#FFF2D6] p-3 rounded-xl border-2 border-[#332C27] space-y-2">
+              <div class="flex justify-between items-center">
+                <!-- 含稅/不含稅切換 Toggle -->
+                <div class="flex items-center gap-1">
+                  <button type="button" onclick="setExpenseTaxMode(false)" id="tax-mode-excl" class="maka-btn px-2.5 py-1 text-[11px] font-black bg-white border-2 border-[#332C27]">
+                    未稅
+                  </button>
+                  <button type="button" onclick="setExpenseTaxMode(true)" id="tax-mode-incl" class="maka-btn px-2.5 py-1 text-[11px] font-black bg-[#FDE875] border-2 border-[#332C27]">
+                    含稅 (+10%)
+                  </button>
+                </div>
+                <span class="text-xs font-bold text-gray-500">最終記帳金額 (JPY)</span>
+              </div>
+
+              <div class="flex justify-between items-end pt-1">
+                <div class="text-left text-[11px] font-bold text-gray-500">
+                  <span id="expense-raw-label">輸入原價：</span>
+                  <span id="expense-raw-display">¥ 0</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-2xl font-black text-[#332C27]">¥ <span id="expense-amount-display">0</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 計算機按鍵快速記帳 -->
+          <div class="grid grid-cols-3 gap-2 pt-1">
+            <button onclick="appendExpenseNum('1')" class="maka-btn p-2.5 font-black text-base bg-white">1</button>
+            <button onclick="appendExpenseNum('2')" class="maka-btn p-2.5 font-black text-base bg-white">2</button>
+            <button onclick="appendExpenseNum('3')" class="maka-btn p-2.5 font-black text-base bg-white">3</button>
+            <button onclick="appendExpenseNum('4')" class="maka-btn p-2.5 font-black text-base bg-white">4</button>
+            <button onclick="appendExpenseNum('5')" class="maka-btn p-2.5 font-black text-base bg-white">5</button>
+            <button onclick="appendExpenseNum('6')" class="maka-btn p-2.5 font-black text-base bg-white">6</button>
+            <button onclick="appendExpenseNum('7')" class="maka-btn p-2.5 font-black text-base bg-white">7</button>
+            <button onclick="appendExpenseNum('8')" class="maka-btn p-2.5 font-black text-base bg-white">8</button>
+            <button onclick="appendExpenseNum('9')" class="maka-btn p-2.5 font-black text-base bg-white">9</button>
+            <button onclick="appendExpenseNum('00')" class="maka-btn p-2.5 font-black text-sm bg-gray-100">00</button>
+            <button onclick="appendExpenseNum('0')" class="maka-btn p-2.5 font-black text-base bg-white">0</button>
+            <button onclick="deleteExpenseNum()" class="maka-btn p-2.5 font-black text-xs bg-orange-200">⌫ 刪除</button>
+          </div>
+
+          <!-- 快速確定加入 -->
+          <button onclick="addExpenseRecord()" class="w-full maka-btn bg-[#FDE875] py-2.5 font-black text-sm flex items-center justify-center gap-1 active:scale-98">
+            <span>➕</span> 儲存此筆消費記錄
+          </button>
+        </div>
+
+        <!-- 消費明細列表 -->
+        <div class="maka-card bg-white p-4 space-y-3">
+          <div class="flex items-center justify-between border-b-2 border-[#332C27] pb-2">
+            <h4 class="font-black text-sm flex items-center gap-1">
+              <span>📜</span> 消費記錄明細
+            </h4>
+            <button onclick="clearAllExpenses()" class="text-[10px] font-bold text-rose-600 bg-rose-100 border border-rose-400 px-2 py-0.5 rounded-lg hover:bg-rose-200">
+              清空紀錄
+            </button>
+          </div>
+
+          <div id="expense-list" class="space-y-2 max-h-60 overflow-y-auto no-scrollbar">
+            <!-- 動態渲染記帳明細 -->
+            <p class="text-xs text-gray-400 text-center py-4 font-bold">尚無消費紀錄，快來記下第一筆開銷吧！</p>
+          </div>
         </div>
       </section>
 
@@ -1019,6 +1122,7 @@
 
     function calculateRate() {
       updateCalcDisplay();
+      updateExpenseTotals();
     }
 
     function updateCalcDisplay() {
@@ -1036,6 +1140,140 @@
         const jpyVal = rate > 0 ? Math.round(val / rate) : 0;
         document.getElementById('output-display').innerText = jpyVal.toLocaleString();
       }
+    }
+
+    // --- 記帳功能邏輯 ---
+    let expenseAmountStr = '0';
+    let isTaxIncluded = true; // 預設為含稅 (true: +10% 稅金, false: 原價未稅金額)
+    let expenseRecords = [];
+
+    function setExpenseTaxMode(inclTax) {
+      isTaxIncluded = inclTax;
+
+      const btnIncl = document.getElementById('tax-mode-incl');
+      const btnExcl = document.getElementById('tax-mode-excl');
+
+      if (isTaxIncluded) {
+        btnIncl.classList.remove('bg-white');
+        btnIncl.classList.add('bg-[#FDE875]');
+        btnExcl.classList.remove('bg-[#FDE875]');
+        btnExcl.classList.add('bg-white');
+      } else {
+        btnExcl.classList.remove('bg-white');
+        btnExcl.classList.add('bg-[#FDE875]');
+        btnIncl.classList.remove('bg-[#FDE875]');
+        btnIncl.classList.add('bg-white');
+      }
+
+      updateExpenseInputDisplay();
+    }
+
+    function appendExpenseNum(num) {
+      if (expenseAmountStr === '0') {
+        if (num === '00') return;
+        expenseAmountStr = num;
+      } else {
+        if (expenseAmountStr.length >= 8) return;
+        expenseAmountStr += num;
+      }
+      updateExpenseInputDisplay();
+    }
+
+    function deleteExpenseNum() {
+      if (expenseAmountStr.length <= 1) {
+        expenseAmountStr = '0';
+      } else {
+        expenseAmountStr = expenseAmountStr.slice(0, -1);
+      }
+      updateExpenseInputDisplay();
+    }
+
+    function updateExpenseInputDisplay() {
+      const rawVal = parseInt(expenseAmountStr, 10) || 0;
+      // 若選擇「含稅(+10%)」，自動算出乘以 1.1 後的四捨五入金額
+      const finalVal = isTaxIncluded ? Math.round(rawVal * 1.1) : rawVal;
+
+      document.getElementById('expense-raw-display').innerText = '¥ ' + rawVal.toLocaleString();
+      document.getElementById('expense-amount-display').innerText = finalVal.toLocaleString();
+    }
+
+    function addExpenseRecord() {
+      const rawVal = parseInt(expenseAmountStr, 10) || 0;
+      if (rawVal <= 0) return;
+
+      const finalAmount = isTaxIncluded ? Math.round(rawVal * 1.1) : rawVal;
+      const category = document.getElementById('expense-category').value;
+      let name = document.getElementById('expense-name').value.trim();
+      if (!name) {
+        name = category.replace(/^[^\s]+\s*/, ''); // 若未輸入名稱，預設用類別文字
+      }
+
+      const newRecord = {
+        id: Date.now(),
+        category: category,
+        name: name + (isTaxIncluded ? ' (含稅)' : ' (未稅)'),
+        amount: finalAmount
+      };
+
+      expenseRecords.unshift(newRecord);
+      
+      // 清空輸入
+      expenseAmountStr = '0';
+      updateExpenseInputDisplay();
+      document.getElementById('expense-name').value = '';
+
+      renderExpenseList();
+    }
+
+    function deleteExpenseRecord(id) {
+      expenseRecords = expenseRecords.filter(item => item.id !== id);
+      renderExpenseList();
+    }
+
+    function clearAllExpenses() {
+      if (expenseRecords.length === 0) return;
+      expenseRecords = [];
+      renderExpenseList();
+    }
+
+    function updateExpenseTotals() {
+      const rate = parseFloat(document.getElementById('rate-input')?.value) || 0.21;
+      const totalJpy = expenseRecords.reduce((sum, item) => sum + item.amount, 0);
+      const totalTwd = Math.round(totalJpy * rate);
+
+      document.getElementById('expense-total-jpy').innerText = totalJpy.toLocaleString();
+      document.getElementById('expense-total-twd').innerText = totalTwd.toLocaleString();
+      document.getElementById('expense-rate-display').innerText = rate;
+    }
+
+    function renderExpenseList() {
+      const container = document.getElementById('expense-list');
+      if (!container) return;
+
+      if (expenseRecords.length === 0) {
+        container.innerHTML = `<p class="text-xs text-gray-400 text-center py-4 font-bold">尚無消費紀錄，快來記下第一筆開銷吧！</p>`;
+        updateExpenseTotals();
+        return;
+      }
+
+      container.innerHTML = '';
+      expenseRecords.forEach(item => {
+        const itemHtml = `
+          <div class="flex items-center justify-between bg-[#FDF8EC] p-2.5 rounded-xl border-2 border-[#332C27] text-xs">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="maka-tag bg-[#FFD1DC] px-1.5 py-0.5 text-[10px] font-black whitespace-nowrap">${item.category}</span>
+              <span class="font-bold text-[#332C27] truncate">${item.name}</span>
+            </div>
+            <div class="flex items-center gap-2 ml-2">
+              <span class="font-black text-sm text-[#332C27]">¥${item.amount.toLocaleString()}</span>
+              <button onclick="deleteExpenseRecord(${item.id})" class="text-rose-500 font-bold hover:opacity-75 px-1">✕</button>
+            </div>
+          </div>
+        `;
+        container.innerHTML += itemHtml;
+      });
+
+      updateExpenseTotals();
     }
 
     // 初始化頁面
