@@ -354,13 +354,13 @@
         </div>
 
         <!-- 當日個人備忘錄輸入區（位在最下方） -->
-        <div class="maka-card bg-white p-4 space-y-2">
+        <div class="maka-card bg-white p-4 space-y-2 overflow-hidden">
           <h4 class="font-black text-sm flex items-center gap-1 text-[#332C27]">
             <span>📝</span> 今日個人備忘錄 / 提醒標籤
           </h4>
-          <div class="flex gap-1.5 pt-1">
-            <input type="text" id="memo-input" placeholder="+ 新增備忘/提醒" class="flex-1 min-w-0 font-bold border-2 border-[#332C27] rounded-xl p-2 bg-[#FDF8EC] focus:outline-none focus:bg-white text-sm">
-            <button onclick="addCurrentDayMemo()" class="maka-btn bg-[#FDE875] px-2.5 py-2 font-black text-xs whitespace-nowrap shrink-0">
+          <div class="flex items-center gap-2 pt-1 w-full">
+            <input type="text" id="memo-input" placeholder="+ 新增今日備忘/提醒" class="w-full min-w-0 flex-1 font-bold border-2 border-[#332C27] rounded-xl p-2 bg-[#FDF8EC] focus:outline-none focus:bg-white text-sm">
+            <button onclick="addCurrentDayMemo()" class="maka-btn bg-[#FDE875] px-3 py-2 font-black text-xs whitespace-nowrap shrink-0 flex-none">
               ➕ 新增
             </button>
           </div>
