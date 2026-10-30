@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>2027 東京豬豬冬日自由行 🇯🇵</title>
   <!-- Apple 專屬桌面圖示設定 -->
   <link rel="apple-touch-icon" href="https://placehold.co/180x180/FFD1DC/332C27?text=🐷">
@@ -29,6 +29,12 @@
       color: var(--border-main);
       user-select: none;
       -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    /* 防止 iOS 手機點擊輸入框時畫面自動放大 (字體需至少 16px) */
+    input, select, textarea {
+      font-size: 16px !important;
     }
 
     /* 日系可愛手繪粗邊框卡片與按鈕風格 */
@@ -338,7 +344,7 @@
             <span>📝</span> 今日個人備忘錄 / 提醒標籤
           </h4>
           <div class="flex gap-2 pt-1">
-            <input type="text" id="memo-input" placeholder="+ 新增今日備忘/提醒 (例：記得拿JR Pass)" class="flex-1 text-xs font-bold border-2 border-[#332C27] rounded-xl p-2.5 bg-[#FDF8EC] focus:outline-none focus:bg-white">
+            <input type="text" id="memo-input" placeholder="+ 新增今日備忘/提醒" class="flex-1 font-bold border-2 border-[#332C27] rounded-xl p-2.5 bg-[#FDF8EC] focus:outline-none focus:bg-white text-base">
             <button onclick="addCurrentDayMemo()" class="maka-btn bg-[#FDE875] px-3.5 py-2 font-black text-xs whitespace-nowrap">
               ➕ 新增
             </button>
@@ -453,7 +459,7 @@
 
           <!-- 商品名稱與金額顯示區 -->
           <div class="space-y-2">
-            <input type="text" id="expense-name" placeholder="輸入商品或項目名稱 (選填，例：極上和牛)" class="w-full text-xs font-bold border-2 border-[#332C27] rounded-xl p-2.5 bg-[#FDF8EC] focus:outline-none focus:bg-white">
+            <input type="text" id="expense-name" placeholder="輸入商品或項目名稱 (選填，例：極上和牛)" class="w-full font-bold border-2 border-[#332C27] rounded-xl p-2.5 bg-[#FDF8EC] focus:outline-none focus:bg-white text-base">
             
             <!-- 含稅/不含稅 切換按鈕與金額顯示 -->
             <div class="bg-[#FFF2D6] p-3 rounded-xl border-2 border-[#332C27] space-y-2">
