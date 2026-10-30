@@ -358,10 +358,11 @@
           <h4 class="font-black text-sm flex items-center gap-1 text-[#332C27]">
             <span>📝</span> 今日個人備忘錄 / 提醒標籤
           </h4>
-          <div class="flex items-center gap-2 pt-1 w-full">
-            <input type="text" id="memo-input" placeholder="+ 新增今日備忘/提醒" class="w-full min-w-0 flex-1 font-bold border-2 border-[#332C27] rounded-xl p-2 bg-[#FDF8EC] focus:outline-none focus:bg-white text-sm">
-            <button onclick="addCurrentDayMemo()" class="maka-btn bg-[#FDE875] px-3 py-2 font-black text-xs whitespace-nowrap shrink-0 flex-none">
-              ➕ 新增
+          <!-- 將輸入框與按鈕改為上下分列兩行，徹底解決手機超出格子的問題 -->
+          <div class="space-y-2 pt-1 w-full">
+            <input type="text" id="memo-input" placeholder="+ 新增今日備忘/提醒 (例: 敘敘苑燒肉)" class="w-full font-bold border-2 border-[#332C27] rounded-xl p-2 bg-[#FDF8EC] focus:outline-none focus:bg-white text-base">
+            <button onclick="addCurrentDayMemo()" class="w-full maka-btn bg-[#FDE875] py-2 font-black text-xs flex items-center justify-center gap-1 active:scale-98">
+              ➕ 新增備忘標籤
             </button>
           </div>
           <!-- 當日備忘錄標籤清單 -->
