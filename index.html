@@ -107,7 +107,9 @@
       <div class="absolute -bottom-2 -left-2 text-4xl opacity-20">🐷</div>
       <span class="maka-tag bg-[#FDE875] text-xs px-3 py-1 inline-block mb-1">2027/01/09 - 01/17</span>
       <h1 class="text-2xl font-black text-[#332C27] tracking-wider">2027 東京豬豬冬日自由行 🇯🇵</h1>
-    <!-- 頂部導覽列 (順序：首頁 ➔ 每日行程 ➔ 地鐵圖 ➔ 日幣計算機 ➔ 記帳 ➔ 住宿 ➔ 折價券 ➔ VJW) -->
+    </header>
+
+    <!-- 頂部導覽列 -->
     <nav class="mb-4">
       <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 px-1">
         <button onclick="switchTab('home')" id="btn-home" class="nav-tab-btn maka-btn bg-[#FDE875] px-4 py-2 font-bold text-sm whitespace-nowrap">首頁</button>
@@ -127,7 +129,7 @@
       <!-- 1. 首頁 (Home) -->
       <section id="tab-home" class="tab-content active space-y-4">
         
-        <!-- 旅程總覽 (底色換成淺粉紅色) -->
+        <!-- 旅程總覽 -->
         <div class="maka-card bg-[#FFD1DC] p-5 text-center">
           <div class="text-3xl mb-2">🎌 旅程總覽</div>
           <p class="font-bold text-lg mb-1">高雄小港 (KHH) ⇄ 東京成田 (NRT)</p>
@@ -136,7 +138,7 @@
           </div>
         </div>
 
-        <!-- 航班資訊 (融入首頁，箭頭上加上飛行時間) -->
+        <!-- 航班資訊 -->
         <div class="space-y-3">
           <div class="maka-card bg-[#B5EAD7] p-4 space-y-2">
             <h3 class="font-black text-base flex items-center gap-2 border-b-2 border-[#332C27] pb-1">
@@ -178,6 +180,88 @@
                 <p class="text-lg font-black">22:05</p>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- 🗺️ 每日行程摘要 (從上至下，點擊可跳轉至當日行程) -->
+        <div class="maka-card bg-white p-4 space-y-3">
+          <h3 class="font-black text-base flex items-center gap-2 border-b-2 border-[#332C27] pb-2 text-[#332C27]">
+            <span>🗺️</span> 每日行程摘要
+          </h3>
+          <p class="text-xs text-gray-500 font-bold">💡 點擊下方任意日期可直接快速開啟該天詳細行程：</p>
+          
+          <div class="space-y-2 pt-1">
+            <button onclick="goToDayItinerary(1)" class="w-full maka-btn bg-[#FFF2D6] hover:bg-[#FFE8B5] p-2.5 text-left flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="maka-tag bg-[#FDE875] text-[10px] px-2 py-0.5 font-black">D1</span>
+                <span class="text-xs font-bold text-[#332C27]">🛬 抵達東京 ➔ 上野探索</span>
+              </div>
+              <span class="text-xs font-black text-gray-400">➔</span>
+            </button>
+
+            <button onclick="goToDayItinerary(2)" class="w-full maka-btn bg-[#FFF2D6] hover:bg-[#FFE8B5] p-2.5 text-left flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="maka-tag bg-[#FDE875] text-[10px] px-2 py-0.5 font-black">D2</span>
+                <span class="text-xs font-bold text-[#332C27]">🏛️ 東京車站 ➔ 銀座 ➔ 表參道/澀谷</span>
+              </div>
+              <span class="text-xs font-black text-gray-400">➔</span>
+            </button>
+
+            <button onclick="goToDayItinerary(3)" class="w-full maka-btn bg-[#FFF2D6] hover:bg-[#FFE8B5] p-2.5 text-left flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="maka-tag bg-[#FDE875] text-[10px] px-2 py-0.5 font-black">D3</span>
+                <span class="text-xs font-bold text-[#332C27]">🐱 谷中銀座 ➔ 晴空塔 ➔ 淺草</span>
+              </div>
+              <span class="text-xs font-black text-gray-400">➔</span>
+            </button>
+
+            <button onclick="goToDayItinerary(4)" class="w-full maka-btn bg-[#FFF2D6] hover:bg-[#FFE8B5] p-2.5 text-left flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="maka-tag bg-[#FDE875] text-[10px] px-2 py-0.5 font-black">D4</span>
+                <span class="text-xs font-bold text-[#332C27]">🏰 東京迪士尼樂園 (Disneyland)</span>
+              </div>
+              <span class="text-xs font-black text-gray-400">➔</span>
+            </button>
+
+            <button onclick="goToDayItinerary(5)" class="w-full maka-btn bg-[#FFF2D6] hover:bg-[#FFE8B5] p-2.5 text-left flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="maka-tag bg-[#FDE875] text-[10px] px-2 py-0.5 font-black">D5</span>
+                <span class="text-xs font-bold text-[#332C27]">⛩️ 鎌倉 ➔ 江之島夕陽海景</span>
+              </div>
+              <span class="text-xs font-black text-gray-400">➔</span>
+            </button>
+
+            <button onclick="goToDayItinerary(6)" class="w-full maka-btn bg-[#FFF2D6] hover:bg-[#FFE8B5] p-2.5 text-left flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="maka-tag bg-[#FDE875] text-[10px] px-2 py-0.5 font-black">D6</span>
+                <span class="text-xs font-bold text-[#332C27]">🚄 北陸新幹線 ➔ 輕井澤滑雪 ⛷️</span>
+              </div>
+              <span class="text-xs font-black text-gray-400">➔</span>
+            </button>
+
+            <button onclick="goToDayItinerary(7)" class="w-full maka-btn bg-[#FFF2D6] hover:bg-[#FFE8B5] p-2.5 text-left flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="maka-tag bg-[#FDE875] text-[10px] px-2 py-0.5 font-black">D7</span>
+                <span class="text-xs font-bold text-[#332C27]">🌲 舊輕井澤漫步 ➔ 王子 Outlet</span>
+              </div>
+              <span class="text-xs font-black text-gray-400">➔</span>
+            </button>
+
+            <button onclick="goToDayItinerary(8)" class="w-full maka-btn bg-[#FFF2D6] hover:bg-[#FFE8B5] p-2.5 text-left flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="maka-tag bg-[#FDE875] text-[10px] px-2 py-0.5 font-black">D8</span>
+                <span class="text-xs font-bold text-[#332C27]">⚡ 新宿潮流 ➔ 池袋動漫聖地</span>
+              </div>
+              <span class="text-xs font-black text-gray-400">➔</span>
+            </button>
+
+            <button onclick="goToDayItinerary(9)" class="w-full maka-btn bg-[#FFF2D6] hover:bg-[#FFE8B5] p-2.5 text-left flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="maka-tag bg-[#FDE875] text-[10px] px-2 py-0.5 font-black">D9</span>
+                <span class="text-xs font-bold text-[#332C27]">🛫 阿美橫丁最後衝刺 ➔ 滿載返台</span>
+              </div>
+              <span class="text-xs font-black text-gray-400">➔</span>
+            </button>
           </div>
         </div>
 
@@ -246,6 +330,23 @@
         <!-- 當日景點/行程卡片列表 -->
         <div id="day-spots" class="space-y-3">
           <!-- JS 動態繪製 -->
+        </div>
+
+        <!-- 當日個人備忘錄輸入區（位在最下方） -->
+        <div class="maka-card bg-white p-4 space-y-2">
+          <h4 class="font-black text-sm flex items-center gap-1 text-[#332C27]">
+            <span>📝</span> 今日個人備忘錄 / 提醒標籤
+          </h4>
+          <div class="flex gap-2 pt-1">
+            <input type="text" id="memo-input" placeholder="+ 新增今日備忘/提醒 (例：記得拿JR Pass)" class="flex-1 text-xs font-bold border-2 border-[#332C27] rounded-xl p-2.5 bg-[#FDF8EC] focus:outline-none focus:bg-white">
+            <button onclick="addCurrentDayMemo()" class="maka-btn bg-[#FDE875] px-3.5 py-2 font-black text-xs whitespace-nowrap">
+              ➕ 新增
+            </button>
+          </div>
+          <!-- 當日備忘錄標籤清單 -->
+          <div id="memo-tags-container" class="flex flex-wrap gap-1.5 pt-2">
+            <!-- JS 動態繪製備忘錄標籤 -->
+          </div>
         </div>
       </section>
 
@@ -589,6 +690,19 @@
             }
           },
           { 
+            name: "🚆 交通：東京車站 ➔ 銀座", 
+            desc: "💡 點擊查看地鐵丸之內線/步行指引",
+            clickable: true,
+            modalData: {
+              tag: "交通指南",
+              title: "東京車站 ➔ 銀座 🚆",
+              info: [
+                { label: "🚇 地鐵搭乘", val: "從「東京站」搭乘地鐵丸之內線（M）1 站直達「銀座站」（約 3 分鐘，車資 ¥180）" },
+                { label: "🚶 漫步建議", val: "天氣好時可由丸之內南口沿有樂町高架橋漫步至銀座（步行約 10-15 分鐘）" }
+              ]
+            }
+          },
+          { 
             name: "銀座 步行者天國 🚶‍♂️", 
             desc: "💡 周日限定封街徒步區與周邊商場（伊東屋、Uniqlo 旗艦店）",
             clickable: true,
@@ -598,6 +712,20 @@
               info: [
                 { label: "⏰ 開放時間", val: "週日 12:00 ~ 17:00 (冬期)" },
                 { label: "🛍️ 周邊亮點", val: "銀座 GINZA SIX、伊東屋 (Itoya 文具大樓)、UNIQLO 銀座旗艦店" }
+              ]
+            }
+          },
+          { 
+            name: "🚆 交通：銀座 ➔ 表參道", 
+            desc: "💡 點擊查看地鐵銀座線直達路線",
+            clickable: true,
+            modalData: {
+              tag: "交通指南",
+              title: "銀座 ➔ 表參道 🚆",
+              info: [
+                { label: "🚇 推薦路線", val: "從「銀座站」搭乘地鐵銀座線（G，往澀谷方向）直達「表參道站」（G02/Z02/C04）" },
+                { label: "⏱️ 車程時間", val: "約 13 分鐘，無須轉乘（IC卡車資約 ¥209）" },
+                { label: "💡 出站建議", val: "A2 出口直通表參道精品街與丘陵大道" }
               ]
             }
           },
@@ -974,7 +1102,13 @@
       }
     };
 
-    // 切換導覽頁籤 (Home, Itinerary, Metro, Calc, Hotel)
+    // 儲存當前選中的天數 (預設 D1)
+    let currentActiveDay = 1;
+
+    // 自訂備忘錄資料結構 (預設讀取 localStorage，若無則空物件)
+    let customMemos = JSON.parse(localStorage.getItem('tokyo_trip_memos') || '{}');
+
+    // 切換導覽頁籤 (Home, Itinerary, Metro, Calc, Expense, Hotel)
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-tab-btn').forEach(el => {
@@ -994,8 +1128,17 @@
       }
     }
 
+    // 從首頁摘要直接快速跳轉至「每日行程」的特定天數
+    function goToDayItinerary(dayNum) {
+      switchTab('itinerary');
+      showDay(dayNum);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     // 切換每日行程 (DAY 1 - DAY 9)
     function showDay(dayNum) {
+      currentActiveDay = dayNum;
+
       document.querySelectorAll('.day-select-btn').forEach(btn => {
         btn.classList.remove('bg-[#FDE875]');
         btn.classList.add('bg-white');
@@ -1036,29 +1179,94 @@
           spotsContainer.innerHTML += itemHtml;
         });
       }
+
+      // 渲染當日的個人備忘錄標籤
+      renderDayMemos(dayNum);
+    }
+
+    // --- 個人備忘錄功能 ---
+    function addCurrentDayMemo() {
+      const inputEl = document.getElementById('memo-input');
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      if (!customMemos[currentActiveDay]) {
+        customMemos[currentActiveDay] = [];
+      }
+
+      const newMemo = {
+        id: Date.now(),
+        text: text
+      };
+
+      customMemos[currentActiveDay].push(newMemo);
+      localStorage.setItem('tokyo_trip_memos', JSON.stringify(customMemos));
+
+      inputEl.value = '';
+      renderDayMemos(currentActiveDay);
+    }
+
+    function deleteMemo(dayNum, memoId) {
+      if (!customMemos[dayNum]) return;
+      customMemos[dayNum] = customMemos[dayNum].filter(m => m.id !== memoId);
+      localStorage.setItem('tokyo_trip_memos', JSON.stringify(customMemos));
+      renderDayMemos(dayNum);
+    }
+
+    function renderDayMemos(dayNum) {
+      const container = document.getElementById('memo-tags-container');
+      if (!container) return;
+
+      const list = customMemos[dayNum] || [];
+      if (list.length === 0) {
+        container.innerHTML = `<span class="text-[11px] text-gray-400 font-bold">尚無備忘標籤</span>`;
+        return;
+      }
+
+      container.innerHTML = '';
+      list.forEach(memo => {
+        // 編碼搜尋字串以利開啟 Google Maps
+        const encodedQuery = encodeURIComponent(memo.text);
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
+
+        const tagHtml = `
+          <span class="maka-tag bg-[#FFD1DC] text-[#332C27] text-xs px-2.5 py-1 flex items-center gap-1.5 shadow-sm font-bold">
+            <span>📝 ${memo.text}</span>
+            <a href="${mapsUrl}" target="_blank" class="maka-btn bg-white text-[10px] px-1.5 py-0.5 rounded-md hover:bg-yellow-100 flex items-center gap-0.5 no-underline text-[#332C27] border border-[#332C27]">
+              🗺️ 地圖
+            </a>
+            <button onclick="deleteMemo(${dayNum}, ${memo.id})" class="text-xs font-black text-rose-600 hover:opacity-80 ml-0.5">✕</button>
+          </span>
+        `;
+        container.innerHTML += tagHtml;
+      });
     }
 
     // 打開 Modal 彈窗
     function openSpotModal(dayNum, spotIdx) {
-      const spot = itineraryData[dayNum].spots[spotIdx];
-      if (!spot || !spot.modalData) return;
+      const data = itineraryData[dayNum];
+      if (!data || !data.spots[spotIdx]) return;
 
+      const spot = data.spots[spotIdx];
       const modalData = spot.modalData;
-      document.getElementById('modal-tag').innerText = modalData.tag;
-      document.getElementById('modal-title').innerText = modalData.title;
+      if (!modalData) return;
 
-      const bodyContainer = document.getElementById('modal-body');
-      bodyContainer.innerHTML = '';
+      document.getElementById('modal-tag').innerText = modalData.tag || '景點資訊';
+      document.getElementById('modal-title').innerText = modalData.title || spot.name;
 
-      modalData.info.forEach(item => {
-        const infoHtml = `
-          <div>
-            <span class="font-bold text-xs text-gray-500 block">${item.label}：</span>
-            <span class="font-bold text-sm text-[#332C27]">${item.val}</span>
-          </div>
-        `;
-        bodyContainer.innerHTML += infoHtml;
-      });
+      const bodyEl = document.getElementById('modal-body');
+      bodyEl.innerHTML = '';
+
+      if (modalData.info && Array.isArray(modalData.info)) {
+        modalData.info.forEach(item => {
+          bodyEl.innerHTML += `
+            <div>
+              <span class="font-bold text-gray-500 block">${item.label}：</span>
+              <span class="font-bold text-sm text-[#332C27]">${item.val}</span>
+            </div>
+          `;
+        });
+      }
 
       document.getElementById('spot-modal').classList.remove('hidden');
     }
@@ -1068,219 +1276,238 @@
       document.getElementById('spot-modal').classList.add('hidden');
     }
 
-    // --- 日幣計算機邏輯 ---
-    let inputStr = '0';
+    // --- 日幣計算機功能 ---
+    let calcValue = '0';
     let isJpyToTwd = true; // true: JPY ➔ TWD, false: TWD ➔ JPY
 
     function toggleDirection() {
       isJpyToTwd = !isJpyToTwd;
-      
       const inputLabel = document.getElementById('input-label');
       const outputLabel = document.getElementById('output-label');
-      
+      const swapIcon = document.getElementById('swap-icon');
+
       if (isJpyToTwd) {
         inputLabel.innerText = '日幣 (JPY)';
         outputLabel.innerText = '台幣 (TWD)';
+        swapIcon.innerText = '🔄';
       } else {
         inputLabel.innerText = '台幣 (TWD)';
         outputLabel.innerText = '日幣 (JPY)';
+        swapIcon.innerText = '🔀';
       }
-      
-      updateCalcDisplay();
+
+      calcValue = '0';
+      calculateRate();
     }
 
     function appendNum(num) {
-      if (inputStr === '0') {
-        inputStr = num;
+      if (calcValue === '0') {
+        calcValue = num;
       } else {
-        if (inputStr.length >= 8) return;
-        inputStr += num;
+        calcValue += num;
       }
-      updateCalcDisplay();
+      calculateRate();
     }
 
     function deleteNum() {
-      if (inputStr.length <= 1) {
-        inputStr = '0';
+      if (calcValue.length > 1) {
+        calcValue = calcValue.slice(0, -1);
       } else {
-        inputStr = inputStr.slice(0, -1);
+        calcValue = '0';
       }
-      updateCalcDisplay();
+      calculateRate();
     }
 
     function clearCalc() {
-      inputStr = '0';
-      updateCalcDisplay();
+      calcValue = '0';
+      calculateRate();
     }
 
-    function applyTax(factor) {
-      let val = parseFloat(inputStr) || 0;
-      val = Math.round(val * factor);
-      inputStr = val.toString();
-      updateCalcDisplay();
+    function applyTax(rateMultiplier) {
+      let num = parseFloat(calcValue) || 0;
+      num = Math.round(num * rateMultiplier);
+      calcValue = num.toString();
+      calculateRate();
     }
 
     function calculateRate() {
-      updateCalcDisplay();
-      updateExpenseTotals();
-    }
+      const rateInput = document.getElementById('rate-input');
+      const rate = parseFloat(rateInput.value) || 0.21;
+      const inputDisplay = document.getElementById('input-display');
+      const outputDisplay = document.getElementById('output-display');
 
-    function updateCalcDisplay() {
-      const val = parseInt(inputStr, 10) || 0;
-      const rate = parseFloat(document.getElementById('rate-input').value) || 0.21;
-
-      document.getElementById('input-display').innerText = val.toLocaleString();
+      inputDisplay.innerText = Number(calcValue).toLocaleString();
 
       if (isJpyToTwd) {
-        // JPY ➔ TWD
-        const twdVal = Math.round(val * rate);
-        document.getElementById('output-display').innerText = twdVal.toLocaleString();
+        const twd = Math.round(parseFloat(calcValue) * rate);
+        outputDisplay.innerText = twd.toLocaleString();
       } else {
-        // TWD ➔ JPY
-        const jpyVal = rate > 0 ? Math.round(val / rate) : 0;
-        document.getElementById('output-display').innerText = jpyVal.toLocaleString();
+        const jpy = rate > 0 ? Math.round(parseFloat(calcValue) / rate) : 0;
+        outputDisplay.innerText = jpy.toLocaleString();
+      }
+
+      // 同步更新記帳頁面的匯率顯示
+      const expenseRateDisplay = document.getElementById('expense-rate-display');
+      if (expenseRateDisplay) {
+        expenseRateDisplay.innerText = rate;
       }
     }
 
-    // --- 記帳功能邏輯 ---
-    let expenseAmountStr = '0';
-    let isTaxIncluded = true; // 預設為含稅 (true: +10% 稅金, false: 原價未稅金額)
-    let expenseRecords = [];
+    // --- 記帳 (Expense Tracker) 功能 ---
+    let expenseRawValue = '0'; // 未計算前的原始輸入數字
+    let isExpenseTaxIncluded = true; // 預設為含稅 (+10%)
+    let expensesList = JSON.parse(localStorage.getItem('tokyo_trip_expenses') || '[]');
 
-    function setExpenseTaxMode(inclTax) {
-      isTaxIncluded = inclTax;
-
-      const btnIncl = document.getElementById('tax-mode-incl');
+    function setExpenseTaxMode(isIncl) {
+      isExpenseTaxIncluded = isIncl;
       const btnExcl = document.getElementById('tax-mode-excl');
+      const btnIncl = document.getElementById('tax-mode-incl');
 
-      if (isTaxIncluded) {
-        btnIncl.classList.remove('bg-white');
-        btnIncl.classList.add('bg-[#FDE875]');
-        btnExcl.classList.remove('bg-[#FDE875]');
-        btnExcl.classList.add('bg-white');
+      if (isIncl) {
+        btnIncl.className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-[#FDE875] border-2 border-[#332C27]";
+        btnExcl.className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-white border-2 border-[#332C27]";
       } else {
-        btnExcl.classList.remove('bg-white');
-        btnExcl.classList.add('bg-[#FDE875]');
-        btnIncl.classList.remove('bg-[#FDE875]');
-        btnIncl.classList.add('bg-white');
+        btnExcl.className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-[#FDE875] border-2 border-[#332C27]";
+        btnIncl.className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-white border-2 border-[#332C27]";
       }
 
-      updateExpenseInputDisplay();
+      updateExpenseDisplay();
     }
 
-    function appendExpenseNum(num) {
-      if (expenseAmountStr === '0') {
-        if (num === '00') return;
-        expenseAmountStr = num;
+    function appendExpenseNum(str) {
+      if (expenseRawValue === '0') {
+        if (str === '00') return;
+        expenseRawValue = str;
       } else {
-        if (expenseAmountStr.length >= 8) return;
-        expenseAmountStr += num;
+        expenseRawValue += str;
       }
-      updateExpenseInputDisplay();
+      updateExpenseDisplay();
     }
 
     function deleteExpenseNum() {
-      if (expenseAmountStr.length <= 1) {
-        expenseAmountStr = '0';
+      if (expenseRawValue.length > 1) {
+        expenseRawValue = expenseRawValue.slice(0, -1);
       } else {
-        expenseAmountStr = expenseAmountStr.slice(0, -1);
+        expenseRawValue = '0';
       }
-      updateExpenseInputDisplay();
+      updateExpenseDisplay();
     }
 
-    function updateExpenseInputDisplay() {
-      const rawVal = parseInt(expenseAmountStr, 10) || 0;
-      // 若選擇「含稅(+10%)」，自動算出乘以 1.1 後的四捨五入金額
-      const finalVal = isTaxIncluded ? Math.round(rawVal * 1.1) : rawVal;
+    function updateExpenseDisplay() {
+      const rawNum = parseInt(expenseRawValue, 10) || 0;
+      let finalNum = rawNum;
 
-      document.getElementById('expense-raw-display').innerText = '¥ ' + rawVal.toLocaleString();
-      document.getElementById('expense-amount-display').innerText = finalVal.toLocaleString();
+      if (isExpenseTaxIncluded) {
+        finalNum = Math.round(rawNum * 1.1);
+      }
+
+      document.getElementById('expense-raw-display').innerText = `¥ ${rawNum.toLocaleString()}`;
+      document.getElementById('expense-amount-display').innerText = finalNum.toLocaleString();
     }
 
     function addExpenseRecord() {
-      const rawVal = parseInt(expenseAmountStr, 10) || 0;
-      if (rawVal <= 0) return;
+      const rawNum = parseInt(expenseRawValue, 10) || 0;
+      if (rawNum <= 0) return;
 
-      const finalAmount = isTaxIncluded ? Math.round(rawVal * 1.1) : rawVal;
       const category = document.getElementById('expense-category').value;
-      let name = document.getElementById('expense-name').value.trim();
-      if (!name) {
-        name = category.replace(/^[^\s]+\s*/, ''); // 若未輸入名稱，預設用類別文字
+      const nameInput = document.getElementById('expense-name').value.trim();
+      
+      let finalNum = rawNum;
+      let taxLabel = ' (未稅)';
+
+      if (isExpenseTaxIncluded) {
+        finalNum = Math.round(rawNum * 1.1);
+        taxLabel = ' (含稅)';
       }
+
+      const itemName = nameInput ? `${nameInput}${taxLabel}` : `${category.split(' ')[1] || '消費'}${taxLabel}`;
 
       const newRecord = {
         id: Date.now(),
         category: category,
-        name: name + (isTaxIncluded ? ' (含稅)' : ' (未稅)'),
-        amount: finalAmount
+        name: itemName,
+        amountJpy: finalNum,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
 
-      expenseRecords.unshift(newRecord);
-      
-      // 清空輸入
-      expenseAmountStr = '0';
-      updateExpenseInputDisplay();
-      document.getElementById('expense-name').value = '';
+      expensesList.unshift(newRecord);
+      localStorage.setItem('tokyo_trip_expenses', JSON.stringify(expensesList));
 
-      renderExpenseList();
+      // 重置輸入
+      expenseRawValue = '0';
+      document.getElementById('expense-name').value = '';
+      updateExpenseDisplay();
+
+      renderExpenses();
     }
 
-    function deleteExpenseRecord(id) {
-      expenseRecords = expenseRecords.filter(item => item.id !== id);
-      renderExpenseList();
+    function deleteExpense(id) {
+      expensesList = expensesList.filter(item => item.id !== id);
+      localStorage.setItem('tokyo_trip_expenses', JSON.stringify(expensesList));
+      renderExpenses();
     }
 
     function clearAllExpenses() {
-      if (expenseRecords.length === 0) return;
-      expenseRecords = [];
-      renderExpenseList();
+      if (confirm('確定要清空所有消費記錄嗎？')) {
+        expensesList = [];
+        localStorage.removeItem('tokyo_trip_expenses');
+        renderExpenses();
+      }
     }
 
-    function updateExpenseTotals() {
-      const rate = parseFloat(document.getElementById('rate-input')?.value) || 0.21;
-      const totalJpy = expenseRecords.reduce((sum, item) => sum + item.amount, 0);
-      const totalTwd = Math.round(totalJpy * rate);
+    function renderExpenses() {
+      const listContainer = document.getElementById('expense-list');
+      const totalJpyEl = document.getElementById('expense-total-jpy');
+      const totalTwdEl = document.getElementById('expense-total-twd');
+      const rateInput = document.getElementById('rate-input');
+      const rate = parseFloat(rateInput.value) || 0.21;
 
-      document.getElementById('expense-total-jpy').innerText = totalJpy.toLocaleString();
-      document.getElementById('expense-total-twd').innerText = totalTwd.toLocaleString();
-      document.getElementById('expense-rate-display').innerText = rate;
-    }
-
-    function renderExpenseList() {
-      const container = document.getElementById('expense-list');
-      if (!container) return;
-
-      if (expenseRecords.length === 0) {
-        container.innerHTML = `<p class="text-xs text-gray-400 text-center py-4 font-bold">尚無消費紀錄，快來記下第一筆開銷吧！</p>`;
-        updateExpenseTotals();
+      if (expensesList.length === 0) {
+        listContainer.innerHTML = `<p class="text-xs text-gray-400 text-center py-4 font-bold">尚無消費紀錄，快來記下第一筆開銷吧！</p>`;
+        totalJpyEl.innerText = '0';
+        totalTwdEl.innerText = '0';
         return;
       }
 
-      container.innerHTML = '';
-      expenseRecords.forEach(item => {
-        const itemHtml = `
-          <div class="flex items-center justify-between bg-[#FDF8EC] p-2.5 rounded-xl border-2 border-[#332C27] text-xs">
-            <div class="flex items-center gap-2 overflow-hidden">
-              <span class="maka-tag bg-[#FFD1DC] px-1.5 py-0.5 text-[10px] font-black whitespace-nowrap">${item.category}</span>
-              <span class="font-bold text-[#332C27] truncate">${item.name}</span>
+      let totalJpy = 0;
+      listContainer.innerHTML = '';
+
+      expensesList.forEach(item => {
+        totalJpy += item.amountJpy;
+        const twdVal = Math.round(item.amountJpy * rate);
+
+        const html = `
+          <div class="flex items-center justify-between p-2.5 bg-[#FDF8EC] rounded-xl border border-[#332C27] text-xs">
+            <div class="flex items-center gap-2">
+              <span class="text-base">${item.category.split(' ')[0]}</span>
+              <div>
+                <p class="font-bold text-[#332C27]">${item.name}</p>
+                <p class="text-[10px] text-gray-400 font-bold">${item.time}</p>
+              </div>
             </div>
-            <div class="flex items-center gap-2 ml-2">
-              <span class="font-black text-sm text-[#332C27]">¥${item.amount.toLocaleString()}</span>
-              <button onclick="deleteExpenseRecord(${item.id})" class="text-rose-500 font-bold hover:opacity-75 px-1">✕</button>
+            <div class="flex items-center gap-2">
+              <div class="text-right">
+                <p class="font-black text-sm text-[#332C27]">¥ ${item.amountJpy.toLocaleString()}</p>
+                <p class="text-[10px] text-gray-500 font-bold">NT$ ${twdVal.toLocaleString()}</p>
+              </div>
+              <button onclick="deleteExpense(${item.id})" class="text-rose-500 font-black p-1 text-sm hover:opacity-75">✕</button>
             </div>
           </div>
         `;
-        container.innerHTML += itemHtml;
+        listContainer.innerHTML += html;
       });
 
-      updateExpenseTotals();
+      totalJpyEl.innerText = totalJpy.toLocaleString();
+      totalTwdEl.innerText = Math.round(totalJpy * rate).toLocaleString();
     }
 
-    // 初始化頁面
+    // 頁面初次載入初始化
     window.onload = function() {
       showDay(1);
+      calculateRate();
+      updateExpenseDisplay();
+      renderExpenses();
     };
   </script>
-
 </body>
 </html>
