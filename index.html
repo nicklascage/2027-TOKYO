@@ -54,8 +54,9 @@
       cursor: pointer;
     }
 
+    /* 按鈕點擊時的 Q 彈視覺縮放與壓彈回饋 */
     .maka-btn:active {
-      transform: translateY(3.5px);
+      transform: scale(0.93) translateY(3.5px);
       box-shadow: 0 0 0 var(--border-main);
     }
 
@@ -74,7 +75,7 @@
       scrollbar-width: none;
     }
 
-    /* 分頁淡入淡出動畫 */
+    /* 分頁淡入與 Q 彈切換動畫 */
     .tab-content {
       display: none;
       opacity: 0;
@@ -86,26 +87,20 @@
       display: block;
       opacity: 1;
       transform: translateY(0);
-      animation: makaBounce 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: makaBounce 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     /* 可愛彈跳 Keyframes */
     @keyframes makaBounce {
       0% {
-        transform: scale(0.95) translateY(4px);
+        transform: scale(0.92) translateY(8px);
       }
       60% {
-        transform: scale(1.02) translateY(-2px);
+        transform: scale(1.03) translateY(-3px);
       }
       100% {
         transform: scale(1) translateY(0);
       }
-    }
-
-    /* 按鈕點擊時的微彈跳特效 */
-    .maka-btn:active {
-      transform: scale(0.93);
-      box-shadow: 0 0 0 var(--border-main);
     }
 
     .app-viewport {
@@ -363,9 +358,9 @@
           <h4 class="font-black text-sm flex items-center gap-1 text-[#332C27]">
             <span>📝</span> 今日個人備忘錄 / 提醒標籤
           </h4>
-          <div class="flex gap-2 pt-1">
-            <input type="text" id="memo-input" placeholder="+ 新增今日備忘/提醒" class="flex-1 font-bold border-2 border-[#332C27] rounded-xl p-2.5 bg-[#FDF8EC] focus:outline-none focus:bg-white text-base">
-            <button onclick="addCurrentDayMemo()" class="maka-btn bg-[#FDE875] px-3.5 py-2 font-black text-xs whitespace-nowrap">
+          <div class="flex gap-1.5 pt-1">
+            <input type="text" id="memo-input" placeholder="+ 新增備忘/提醒" class="flex-1 min-w-0 font-bold border-2 border-[#332C27] rounded-xl p-2 bg-[#FDF8EC] focus:outline-none focus:bg-white text-sm">
+            <button onclick="addCurrentDayMemo()" class="maka-btn bg-[#FDE875] px-2.5 py-2 font-black text-xs whitespace-nowrap shrink-0">
               ➕ 新增
             </button>
           </div>
