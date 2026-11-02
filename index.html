@@ -125,25 +125,31 @@
   <div class="app-viewport">
 
     <!-- 標頭 Banner -->
-    <header class="maka-card bg-[#FFF2D6] p-4 text-center mb-4 relative overflow-hidden">
-      <div class="absolute -top-3 -right-3 text-4xl opacity-20">❄️</div>
-      <div class="absolute -bottom-2 -left-2 text-4xl opacity-20">🐷</div>
-      <span class="maka-tag bg-[#FDE875] text-xs px-3 py-1 inline-block mb-1">2027/01/09 - 01/17</span>
-      <h1 class="text-2xl font-black text-[#332C27] tracking-wider">2027 東京豬豬冬日自由行 🇯🇵</h1>
+    <header class="maka-card bg-gradient-to-r from-[#E0F2FE] via-[#BAE6FD] to-[#D1E9F6] p-4 text-center mb-4 relative overflow-hidden">
+      <div class="absolute -top-3 -right-3 text-4xl opacity-30 animate-pulse">❄️</div>
+      <div class="absolute -bottom-3 -left-3 text-4xl opacity-30 animate-pulse">✨</div>
+      <div class="absolute top-1 left-3 text-xl opacity-20">☃️</div>
+      <div class="absolute bottom-1 right-4 text-xl opacity-20">⛷️</div>
+      <span class="maka-tag bg-white/90 text-[#332C27] text-xs px-3 py-1 inline-block mb-1 shadow-sm">2027/01/09 - 01/17</span>
+      <h1 class="text-2xl font-black text-[#332C27] tracking-wider flex items-center justify-center gap-1.5">
+        <span class="text-xl">❄️</span>
+        <span>2027東京豬豬冬日自由行</span>
+        <span class="text-xl">❄️</span>
+      </h1>
     </header>
 
     <!-- 頂部導覽列 (共 9 個快捷按鈕，統一為一致極淺藍色) -->
     <nav class="mb-4">
       <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 px-1">
-        <button onclick="switchTab('home')" id="btn-home" class="nav-tab-btn maka-btn bg-[#BAE6FD] px-4 py-2 font-bold text-sm whitespace-nowrap">首頁</button>
-        <button onclick="switchTab('itinerary')" id="btn-itinerary" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">每日行程</button>
-        <button onclick="switchTab('metro')" id="btn-metro" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">地鐵圖</button>
-        <button onclick="switchTab('calc')" id="btn-calc" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">日幣計算機</button>
-        <button onclick="switchTab('expense')" id="btn-expense" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">記帳</button>
-        <button onclick="switchTab('hotel')" id="btn-hotel" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">住宿</button>
-        <button onclick="openExternalUrl('https://alinchuang.my.canva.site/')" class="maka-btn bg-[#E0F2FE] hover:bg-[#bae6fd] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">折價券</button>
-        <button onclick="openExternalUrl('https://www.vjw.digital.go.jp/main/#/vjwpco001')" class="maka-btn bg-[#E0F2FE] hover:bg-[#bae6fd] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">VJW</button>
-        <button onclick="switchTab('taxrefund')" id="btn-taxrefund" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">退稅</button>
+        <button onclick="switchTab('home')" id="btn-home" class="nav-tab-btn maka-btn bg-gradient-to-b from-[#FFC2CD] to-[#FFAAA5] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">首頁</button>
+        <button onclick="switchTab('itinerary')" id="btn-itinerary" class="nav-tab-btn maka-btn bg-gradient-to-b from-[#FFF0F3] to-[#FFD1DC] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">每日行程</button>
+        <button onclick="switchTab('metro')" id="btn-metro" class="nav-tab-btn maka-btn bg-gradient-to-b from-[#FFF0F3] to-[#FFD1DC] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">地鐵圖</button>
+        <button onclick="switchTab('calc')" id="btn-calc" class="nav-tab-btn maka-btn bg-gradient-to-b from-[#FFF0F3] to-[#FFD1DC] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">日幣計算機</button>
+        <button onclick="switchTab('expense')" id="btn-expense" class="nav-tab-btn maka-btn bg-gradient-to-b from-[#FFF0F3] to-[#FFD1DC] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">記帳</button>
+        <button onclick="switchTab('hotel')" id="btn-hotel" class="nav-tab-btn maka-btn bg-gradient-to-b from-[#FFF0F3] to-[#FFD1DC] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">住宿</button>
+        <button onclick="openExternalUrl('https://alinchuang.my.canva.site/')" class="maka-btn bg-gradient-to-b from-[#FFF0F3] to-[#FFD1DC] hover:opacity-90 px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">折價券</button>
+        <button onclick="openExternalUrl('https://www.vjw.digital.go.jp/main/#/vjwpco001')" class="maka-btn bg-gradient-to-b from-[#FFF0F3] to-[#FFD1DC] hover:opacity-90 px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">VJW</button>
+        <button onclick="switchTab('taxrefund')" id="btn-taxrefund" class="nav-tab-btn maka-btn bg-gradient-to-b from-[#FFF0F3] to-[#FFD1DC] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">退稅</button>
       </div>
     </nav>
 
@@ -1291,8 +1297,7 @@
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-tab-btn').forEach(el => {
-        el.classList.remove('bg-[#BAE6FD]');
-        el.classList.add('bg-[#E0F2FE]');
+        el.className = "nav-tab-btn maka-btn bg-gradient-to-b from-[#FFF0F3] to-[#FFD1DC] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]";
       });
 
       const targetTab = document.getElementById(`tab-${tabId}`);
@@ -1302,8 +1307,7 @@
 
       const targetBtn = document.getElementById(`btn-${tabId}`);
       if (targetBtn) {
-        targetBtn.classList.remove('bg-[#E0F2FE]');
-        targetBtn.classList.add('bg-[#BAE6FD]');
+        targetBtn.className = "nav-tab-btn maka-btn bg-gradient-to-b from-[#FFC2CD] to-[#FFAAA5] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]";
       }
     }
 
