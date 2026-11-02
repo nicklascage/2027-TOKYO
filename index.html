@@ -10,6 +10,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts - Zen Maru Gothic -->
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- HTML5 QR Code Scanner CDN -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <style>
     :root {
       /* 純色奶油黃背景 */
@@ -19,7 +21,7 @@
       --accent-yellow: #FDE875;
       --accent-pink: #FFAAA5;
       --accent-green: #B5EAD7;
-      --accent-blue: #C7CEEA;
+      --accent-blue: #E0E7FF;
       --accent-purple: #E8DFF5;
     }
 
@@ -130,17 +132,18 @@
       <h1 class="text-2xl font-black text-[#332C27] tracking-wider">2027 東京豬豬冬日自由行 🇯🇵</h1>
     </header>
 
-    <!-- 頂部導覽列 -->
+    <!-- 頂部導覽列 (共 9 個快捷按鈕，統一為一致極淺藍色) -->
     <nav class="mb-4">
       <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 px-1">
-        <button onclick="switchTab('home')" id="btn-home" class="nav-tab-btn maka-btn bg-[#FDE875] px-4 py-2 font-bold text-sm whitespace-nowrap">首頁</button>
-        <button onclick="switchTab('itinerary')" id="btn-itinerary" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">每日行程</button>
-        <button onclick="switchTab('metro')" id="btn-metro" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">地鐵圖</button>
-        <button onclick="switchTab('calc')" id="btn-calc" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">日幣計算機</button>
-        <button onclick="switchTab('expense')" id="btn-expense" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">記帳</button>
-        <button onclick="switchTab('hotel')" id="btn-hotel" class="nav-tab-btn maka-btn bg-white px-4 py-2 font-bold text-sm whitespace-nowrap">住宿</button>
-        <a href="https://alinchuang.my.canva.site/" target="_blank" class="maka-btn bg-[#FFF2D6] hover:bg-[#ffe5a8] px-4 py-2 font-bold text-sm whitespace-nowrap flex items-center gap-1 no-underline text-[#332C27]">折價券</a>
-        <a href="https://www.vjw.digital.go.jp/" target="_blank" class="maka-btn bg-[#FFD1DC] hover:bg-[#ffaab5] px-4 py-2 font-bold text-sm whitespace-nowrap flex items-center gap-1 no-underline text-[#332C27]">VJW</a>
+        <button onclick="switchTab('home')" id="btn-home" class="nav-tab-btn maka-btn bg-[#BAE6FD] px-4 py-2 font-bold text-sm whitespace-nowrap">首頁</button>
+        <button onclick="switchTab('itinerary')" id="btn-itinerary" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">每日行程</button>
+        <button onclick="switchTab('metro')" id="btn-metro" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">地鐵圖</button>
+        <button onclick="switchTab('calc')" id="btn-calc" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">日幣計算機</button>
+        <button onclick="switchTab('expense')" id="btn-expense" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">記帳</button>
+        <button onclick="switchTab('hotel')" id="btn-hotel" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">住宿</button>
+        <button onclick="openExternalUrl('https://alinchuang.my.canva.site/')" class="maka-btn bg-[#E0F2FE] hover:bg-[#bae6fd] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">折價券</button>
+        <button onclick="openExternalUrl('https://www.vjw.digital.go.jp/main/#/vjwpco001')" class="maka-btn bg-[#E0F2FE] hover:bg-[#bae6fd] px-4 py-2 font-bold text-sm whitespace-nowrap text-[#332C27]">VJW</button>
+        <button onclick="switchTab('taxrefund')" id="btn-taxrefund" class="nav-tab-btn maka-btn bg-[#E0F2FE] px-4 py-2 font-bold text-sm whitespace-nowrap">退稅</button>
       </div>
     </nav>
 
@@ -358,7 +361,7 @@
           <h4 class="font-black text-sm flex items-center gap-1 text-[#332C27]">
             <span>📝</span> 今日個人備忘錄 / 提醒標籤
           </h4>
-          <!-- 將輸入框與按鈕改為上下分列兩行，徹底解決手機超出格子的問題 -->
+          <!-- 輸入框與按鈕分為上下兩行 -->
           <div class="space-y-2 pt-1 w-full">
             <input type="text" id="memo-input" placeholder="+ 新增今日備忘/提醒 (例: 敘敘苑燒肉)" class="w-full font-bold border-2 border-[#332C27] rounded-xl p-2 bg-[#FDF8EC] focus:outline-none focus:bg-white text-base">
             <button onclick="addCurrentDayMemo()" class="w-full maka-btn bg-[#FDE875] py-2 font-black text-xs flex items-center justify-center gap-1 active:scale-98">
@@ -381,9 +384,9 @@
           <p class="text-xs text-gray-500">點擊下方按鈕可直接開啟或下載東京地下鐵官方繁體中文高清 PDF 路線圖（支援放大與離線檢視）：</p>
 
           <!-- 官方高清 PDF 按鈕 -->
-          <a href="https://www.tokyometro.jp/station/pdf/202305/202305_number_tcn.pdf" target="_blank" class="maka-btn bg-[#FDE875] p-3 block text-center font-bold text-sm hover:opacity-90">
+          <button onclick="openExternalUrl('https://www.tokyometro.jp/station/pdf/202305/202305_number_tcn.pdf')" class="w-full maka-btn bg-[#FDE875] p-3 text-center font-bold text-sm hover:opacity-90 text-[#332C27]">
             📄 開啟東京地鐵官方高清路線圖 (PDF)
-          </a>
+          </button>
         </div>
       </section>
 
@@ -585,8 +588,155 @@
         </div>
       </section>
 
+      <!-- 6. 日本退稅平台專區 (Tax Refund) -->
+      <section id="tab-taxrefund" class="tab-content space-y-4">
+        
+        <!-- 我的退稅平台卡片區 -->
+        <div class="maka-card bg-white p-4 space-y-3">
+          <h3 class="font-black text-base text-[#332C27] flex items-center justify-between">
+            <span>我的退稅平台</span>
+            <span class="text-xs text-gray-400 font-normal">四大官方平台</span>
+          </h3>
+
+          <div class="divide-y-2 divide-gray-100">
+            <!-- 1. J-TaxRefund -->
+            <button onclick="openExternalUrl('https://j-taxrefund.com')" class="w-full py-3 flex items-center justify-between group text-left text-[#332C27]">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-red-50 border-2 border-red-200 flex items-center justify-center text-red-600 font-bold text-lg">
+                  🏛️
+                </div>
+                <div>
+                  <h4 class="font-black text-sm group-hover:text-red-500 transition-colors">J-TaxRefund</h4>
+                  <p class="text-[11px] text-gray-400 font-bold">j-taxrefund.com</p>
+                </div>
+              </div>
+              <div class="w-7 h-7 rounded-lg border-2 border-[#332C27] flex items-center justify-center text-xs font-black bg-gray-50">
+                ↗
+              </div>
+            </button>
+
+            <!-- 2. JP Refund -->
+            <button onclick="openExternalUrl('https://jprefund.jp')" class="w-full py-3 flex items-center justify-between group text-left text-[#332C27]">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-red-50 border-2 border-red-200 flex items-center justify-center text-red-600 font-bold text-lg">
+                  🏛️
+                </div>
+                <div>
+                  <h4 class="font-black text-sm group-hover:text-red-500 transition-colors">JP Refund</h4>
+                  <p class="text-[11px] text-gray-400 font-bold">jprefund.jp</p>
+                </div>
+              </div>
+              <div class="w-7 h-7 rounded-lg border-2 border-[#332C27] flex items-center justify-center text-xs font-black bg-gray-50">
+                ↗
+              </div>
+            </button>
+
+            <!-- 3. Global Blue -->
+            <button onclick="openExternalUrl('https://www.globalblue.com')" class="w-full py-3 flex items-center justify-between group text-left text-[#332C27]">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 border-2 border-blue-200 flex items-center justify-center text-blue-600 font-bold text-lg">
+                  🌐
+                </div>
+                <div>
+                  <h4 class="font-black text-sm group-hover:text-blue-500 transition-colors">Global Blue</h4>
+                  <p class="text-[11px] text-gray-400 font-bold">www.globalblue.com</p>
+                </div>
+              </div>
+              <div class="w-7 h-7 rounded-lg border-2 border-[#332C27] flex items-center justify-center text-xs font-black bg-gray-50">
+                ↗
+              </div>
+            </button>
+
+            <!-- 4. PIE VAT -->
+            <button onclick="openExternalUrl('https://pievat.com/')" class="w-full py-3 flex items-center justify-between group text-left text-[#332C27]">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-50 border-2 border-amber-200 flex items-center justify-center text-amber-600 font-bold text-lg">
+                  🥧
+                </div>
+                <div>
+                  <h4 class="font-black text-sm group-hover:text-amber-500 transition-colors">PIE VAT</h4>
+                  <p class="text-[11px] text-gray-400 font-bold">pievat.com</p>
+                </div>
+              </div>
+              <div class="w-7 h-7 rounded-lg border-2 border-[#332C27] flex items-center justify-center text-xs font-black bg-gray-50">
+                ↗
+              </div>
+            </button>
+          </div>
+
+          <!-- 按鈕行動區：相機掃描 QR & 選擇平台 -->
+          <div class="grid grid-cols-2 gap-2.5 pt-2">
+            <button onclick="startQrScan()" class="maka-btn bg-[#FF7B7B] hover:bg-[#ff6464] text-white p-3 text-xs font-black flex items-center justify-center gap-1.5 shadow-md">
+              <span class="text-base">📷</span> 掃描 QR
+            </button>
+            <button onclick="openPlatformSelect()" class="maka-btn bg-white hover:bg-gray-50 text-[#332C27] p-3 text-xs font-black flex items-center justify-center gap-1.5">
+              <span class="text-base">➕</span> 選擇平台
+            </button>
+          </div>
+        </div>
+
+        <!-- Visit Japan Web 直通連結 -->
+        <button onclick="openExternalUrl('https://www.vjw.digital.go.jp/main/#/vjwpco001')" class="w-full maka-card bg-white p-4 flex items-center justify-between group text-left text-[#332C27]">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🌐</span>
+            <span class="font-black text-sm">Visit Japan Web</span>
+          </div>
+          <div class="w-7 h-7 rounded-lg border-2 border-[#332C27] flex items-center justify-center text-xs font-black bg-gray-50">
+            ↗
+          </div>
+        </button>
+
+        <!-- 免稅小幫手 區塊 -->
+        <div class="maka-card bg-white p-4 space-y-3">
+          <h3 class="font-black text-base text-[#332C27] flex items-center gap-2">
+            <span>免稅小幫手</span>
+          </h3>
+
+          <div class="grid grid-cols-2 gap-3">
+            <button onclick="openHelpModal('flow')" class="maka-card bg-[#FFF0F0] hover:bg-[#ffe2e2] p-4 text-center space-y-2 border-2 border-[#FFD1DC] active:scale-95 transition-transform">
+              <div class="text-3xl">📄</div>
+              <div class="font-black text-sm text-[#332C27]">退稅流程</div>
+            </button>
+
+            <button onclick="openHelpModal('rules')" class="maka-card bg-[#FFF0F0] hover:bg-[#ffe2e2] p-4 text-center space-y-2 border-2 border-[#FFD1DC] active:scale-95 transition-transform">
+              <div class="text-3xl">ℹ️</div>
+              <div class="font-black text-sm text-[#332C27]">免稅新制</div>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
     </main>
 
+  </div>
+
+  <!-- QR Code 相機掃描 Modal -->
+  <div id="qr-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+    <div class="maka-card bg-[#FDF8EC] p-5 w-full max-w-sm space-y-3 relative text-center">
+      <button onclick="stopQrScan()" class="absolute top-3 right-3 bg-rose-300 font-black text-sm px-2.5 py-1 rounded-full border-2 border-[#332C27]">✕</button>
+      <h3 class="font-black text-base text-[#332C27]">開啟相機掃描退稅 QR Code</h3>
+      <p class="text-xs text-gray-500 font-bold">請將相機對準退稅單據上的條碼/QR Code</p>
+      
+      <!-- 相機畫面區域 -->
+      <div id="qr-reader" class="overflow-hidden rounded-xl border-2 border-[#332C27] bg-black min-h-[220px]"></div>
+      <p id="qr-result" class="text-xs font-black text-emerald-600 break-all py-1 min-h-[20px]"></p>
+
+      <button onclick="stopQrScan()" class="w-full maka-btn bg-[#FDE875] py-2 font-black text-xs">關閉相機</button>
+    </div>
+  </div>
+
+  <!-- 免稅小幫手詳情 Modal 彈窗 -->
+  <div id="help-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+    <div class="maka-card bg-[#FDF8EC] p-5 w-full max-w-sm space-y-3 relative max-h-[85vh] overflow-y-auto">
+      <button onclick="closeHelpModal()" class="absolute top-3 right-3 bg-rose-300 font-black text-sm px-2.5 py-1 rounded-full border-2 border-[#332C27]">✕</button>
+      <span id="help-modal-tag" class="text-[10px] font-black bg-[#FFD1DC] px-2 py-0.5 rounded-md border border-[#332C27] inline-block">免稅說明</span>
+      <h3 id="help-modal-title" class="font-black text-lg text-[#332C27] pr-8">說明標題</h3>
+      <div id="help-modal-body" class="space-y-2 text-xs bg-white p-3 rounded-xl border-2 border-[#332C27]">
+        <!-- JS 動態渲染內容 -->
+      </div>
+      <button onclick="closeHelpModal()" class="w-full maka-btn bg-[#FDE875] py-2 font-black text-sm">我知道了</button>
+    </div>
   </div>
 
   <!-- 詳細行程資訊 Modal 彈窗 -->
@@ -603,6 +753,13 @@
   </div>
 
   <script>
+    // 通用外跳網址函式（支援獨立 App/Webview 模式）
+    function openExternalUrl(url) {
+      if (url) {
+        window.open(url, '_blank');
+      }
+    }
+
     // 完整 9 天行程資料
     const itineraryData = {
       1: {
@@ -1130,12 +1287,12 @@
     // 自訂備忘錄資料結構 (預設讀取 localStorage，若無則空物件)
     let customMemos = JSON.parse(localStorage.getItem('tokyo_trip_memos') || '{}');
 
-    // 切換導覽頁籤 (Home, Itinerary, Metro, Calc, Expense, Hotel)
+    // 切換導覽頁籤 (Home, Itinerary, Metro, Calc, Expense, Hotel, TaxRefund)
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-tab-btn').forEach(el => {
-        el.classList.remove('bg-[#FDE875]');
-        el.classList.add('bg-white');
+        el.classList.remove('bg-[#BAE6FD]');
+        el.classList.add('bg-[#E0F2FE]');
       });
 
       const targetTab = document.getElementById(`tab-${tabId}`);
@@ -1145,8 +1302,8 @@
 
       const targetBtn = document.getElementById(`btn-${tabId}`);
       if (targetBtn) {
-        targetBtn.classList.remove('bg-white');
-        targetBtn.classList.add('bg-[#FDE875]');
+        targetBtn.classList.remove('bg-[#E0F2FE]');
+        targetBtn.classList.add('bg-[#BAE6FD]');
       }
     }
 
@@ -1247,16 +1404,15 @@
 
       container.innerHTML = '';
       list.forEach(memo => {
-        // 編碼搜尋字串以利開啟 Google Maps
         const encodedQuery = encodeURIComponent(memo.text);
         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
 
         const tagHtml = `
           <span class="maka-tag bg-[#FFD1DC] text-[#332C27] text-xs px-2.5 py-1 flex items-center gap-1.5 shadow-sm font-bold">
             <span>📝 ${memo.text}</span>
-            <a href="${mapsUrl}" target="_blank" class="maka-btn bg-white text-[10px] px-1.5 py-0.5 rounded-md hover:bg-yellow-100 flex items-center gap-0.5 no-underline text-[#332C27] border border-[#332C27]">
+            <button onclick="openExternalUrl('${mapsUrl}')" class="maka-btn bg-white text-[10px] px-1.5 py-0.5 rounded-md hover:bg-yellow-100 flex items-center gap-0.5 text-[#332C27] border border-[#332C27]">
               🗺️ 地圖
-            </a>
+            </button>
             <button onclick="deleteMemo(${dayNum}, ${memo.id})" class="text-xs font-black text-rose-600 hover:opacity-80 ml-0.5">✕</button>
           </span>
         `;
@@ -1300,7 +1456,7 @@
 
     // --- 日幣計算機功能 ---
     let calcValue = '0';
-    let isJpyToTwd = true; // true: JPY ➔ TWD, false: TWD ➔ JPY
+    let isJpyToTwd = true;
 
     function toggleDirection() {
       isJpyToTwd = !isJpyToTwd;
@@ -1368,7 +1524,6 @@
         outputDisplay.innerText = jpy.toLocaleString();
       }
 
-      // 同步更新記帳頁面的匯率顯示
       const expenseRateDisplay = document.getElementById('expense-rate-display');
       if (expenseRateDisplay) {
         expenseRateDisplay.innerText = rate;
@@ -1376,21 +1531,19 @@
     }
 
     // --- 記帳 (Expense Tracker) 功能 ---
-    let expenseRawValue = '0'; // 未計算前的原始輸入數字
-    let isExpenseTaxIncluded = true; // 預設為含稅 (+10%)
+    let expenseRawValue = '0';
+    let isExpenseTaxIncluded = true;
     let expensesList = JSON.parse(localStorage.getItem('tokyo_trip_expenses') || '[]');
 
     function setExpenseTaxMode(isIncl) {
       isExpenseTaxIncluded = isIncl;
-      const btnExcl = document.getElementById('tax-mode-excl');
-      const btnIncl = document.getElementById('tax-mode-incl');
 
       if (isIncl) {
-        btnIncl.className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-[#FDE875] border-2 border-[#332C27]";
-        btnExcl.className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-white border-2 border-[#332C27]";
+        document.getElementById('tax-mode-incl').className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-[#FDE875] border-2 border-[#332C27]";
+        document.getElementById('tax-mode-excl').className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-white border-2 border-[#332C27]";
       } else {
-        btnExcl.className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-[#FDE875] border-2 border-[#332C27]";
-        btnIncl.className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-white border-2 border-[#332C27]";
+        document.getElementById('tax-mode-excl').className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-[#FDE875] border-2 border-[#332C27]";
+        document.getElementById('tax-mode-incl').className = "maka-btn px-2.5 py-1 text-[11px] font-black bg-white border-2 border-[#332C27]";
       }
 
       updateExpenseDisplay();
@@ -1455,7 +1608,6 @@
       expensesList.unshift(newRecord);
       localStorage.setItem('tokyo_trip_expenses', JSON.stringify(expensesList));
 
-      // 重置輸入
       expenseRawValue = '0';
       document.getElementById('expense-name').value = '';
       updateExpenseDisplay();
@@ -1521,6 +1673,102 @@
 
       totalJpyEl.innerText = totalJpy.toLocaleString();
       totalTwdEl.innerText = Math.round(totalJpy * rate).toLocaleString();
+    }
+
+    // --- 退稅功能 ---
+    let html5QrCodeScanner = null;
+
+    function startQrScan() {
+      document.getElementById('qr-modal').classList.remove('hidden');
+      document.getElementById('qr-result').innerText = '';
+
+      if (!html5QrCodeScanner) {
+        html5QrCodeScanner = new Html5Qrcode("qr-reader");
+      }
+
+      const config = { fps: 10, qrbox: { width: 200, height: 200 } };
+      
+      html5QrCodeScanner.start(
+        { facingMode: "environment" },
+        config,
+        (decodedText) => {
+          document.getElementById('qr-result').innerText = `✅ 掃描成功: ${decodedText}`;
+          if (decodedText.startsWith('http://') || decodedText.startsWith('https://')) {
+            setTimeout(() => {
+              openExternalUrl(decodedText);
+              stopQrScan();
+            }, 1000);
+          }
+        },
+        (errorMessage) => {}
+      ).catch(err => {
+        document.getElementById('qr-result').innerText = "⚠️ 無法開啟相機權限或不支援此裝置。";
+      });
+    }
+
+    function stopQrScan() {
+      if (html5QrCodeScanner) {
+        html5QrCodeScanner.stop().then(() => {
+          document.getElementById('qr-modal').classList.add('hidden');
+        }).catch(() => {
+          document.getElementById('qr-modal').classList.add('hidden');
+        });
+      } else {
+        document.getElementById('qr-modal').classList.add('hidden');
+      }
+    }
+
+    function openPlatformSelect() {
+      alert("💡 可點擊上方 J-TaxRefund、JP Refund、Global Blue 或 PIE VAT 連結直接跳轉至各退稅平台登錄！");
+    }
+
+    function openHelpModal(type) {
+      const modal = document.getElementById('help-modal');
+      const tag = document.getElementById('help-modal-tag');
+      const title = document.getElementById('help-modal-title');
+      const body = document.getElementById('help-modal-body');
+
+      if (type === 'flow') {
+        tag.innerText = "退稅流程";
+        title.innerText = "🛍️ 日本退稅標準流程 (退稅手續)";
+        body.innerHTML = `
+          <div>
+            <span class="font-bold text-gray-500 block">Step 1. 購買結帳</span>
+            <span class="font-bold text-sm text-[#332C27]">出示護照正本（或 Visit Japan Web 免稅 QR Code），達到單店未稅 5,000 日圓以上之門檻。</span>
+          </div>
+          <div>
+            <span class="font-bold text-gray-500 block">Step 2. 登錄平台</span>
+            <span class="font-bold text-sm text-[#332C27]">若店家合作退稅平台（如 Global Blue、PIE VAT、J-TaxRefund），可掃描單據 QR 登錄個人資訊與退稅信用卡。</span>
+          </div>
+          <div>
+            <span class="font-bold text-gray-500 block">Step 3. 機場海關確認</span>
+            <span class="font-bold text-sm text-[#332C27]">托運行李前，於機場海關 KIOSK 出示護照供海關過卡確認免稅商品記錄。</span>
+          </div>
+        `;
+      } else if (type === 'rules') {
+        tag.innerText = "免稅新制";
+        title.innerText = "ℹ️ 2026 年 11 月日本免稅新制說明";
+        body.innerHTML = `
+          <div>
+            <span class="font-bold text-gray-500 block">1. 實行「先付後退」</span>
+            <span class="font-bold text-sm text-[#332C27]">結帳時先支付含 10% 消費稅之總額，出境時於機場海關確認無誤後，再透過信用卡、電子支付或現金退還稅款。</span>
+          </div>
+          <div>
+            <span class="font-bold text-gray-500 block">2. 取消消耗品特殊透明密封袋</span>
+            <span class="font-bold text-sm text-[#332C27]">新制取消了藥妝食品等「紅字透明密封袋」裝袋要求，方便旅客直接打包入行李箱（但境內依舊不可拆封使用）。</span>
+          </div>
+          <div>
+            <span class="font-bold text-gray-500 block">3. 門檻維持未稅 5,000 日圓</span>
+            <span class="font-bold text-sm text-[#332C27]">同一店家單日消費金額依舊維持未稅 5,000 日圓以上即可辦理免稅。</span>
+          </div>
+        `;
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeHelpModal() {
+      document.getElementById('help-modal').classList.add('hidden');
     }
 
     // 頁面初次載入初始化
